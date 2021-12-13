@@ -1,0 +1,7 @@
+*.o
+*.cof
+*.hex
+*.pdsbak
+*.workspace
+*.zip
+*.rar
