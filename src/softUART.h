@@ -19,6 +19,7 @@
 #define SOFT_UART_PIN_RX    _RA3
 #define SOFT_UART_PIN_TRIS  _TRISA3
 #define SOFT_UART_PIN_CN    _CN29IE
+#define SOFT_UART_PIN_PUE	_CN29PUE //pull-up
 
 typedef struct {
   uint8_t *rxBfr;
@@ -31,7 +32,7 @@ typedef struct {
 void softUART_init(softUART_config_t * p_cfg);
 
 // transmite and receive
-uint8_t softUART_trncv(uint16_t * timer1ms);
+uint8_t softUART_trncv(void);
 
 void softUART_send(uint8_t bfr[], uint8_t length);
 

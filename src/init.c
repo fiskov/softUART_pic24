@@ -20,4 +20,5 @@ void init(void)
   _T1IE = 1;  
   
   _DEBUG_TRIS = 0;
+  _DEBUG2_TRIS = 0;
 }

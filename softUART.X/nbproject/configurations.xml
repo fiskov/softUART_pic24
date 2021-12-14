@@ -75,7 +75,7 @@
         <makeUseCleanTarget>false</makeUseCleanTarget>
         <makeCustomizationPreStep></makeCustomizationPreStep>
         <makeCustomizationPostStepEnabled>true</makeCustomizationPostStepEnabled>
-        <makeCustomizationPostStep>COPY ${ImagePath} ..\proteus\out.${OUTPUT_SUFFIX}</makeCustomizationPostStep>
+        <makeCustomizationPostStep>COPY  ${ImageDir}\${ProjectName}.X.production.cof ..\proteus\out.cof</makeCustomizationPostStep>
         <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
@@ -183,7 +183,7 @@
         <property key="oXC16ld-stackguard" value="16"/>
         <property key="preprocessor-macros" value=""/>
         <property key="remove-unused-sections" value="false"/>
-        <property key="report-memory-usage" value="true"/>
+        <property key="report-memory-usage" value="false"/>
         <property key="secure-eeprom" value="no_eeprom"/>
         <property key="secure-flash" value="no_flash"/>
         <property key="secure-ram" value="no_ram"/>

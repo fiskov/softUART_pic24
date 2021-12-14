@@ -6,7 +6,8 @@
 //PIN CONFIG
 #define _DEBUG 			_RA0    
 #define _DEBUG_TRIS 	_TRISA0
-
+#define _DEBUG2 			_RA1    
+#define _DEBUG2_TRIS 	_TRISA1
 //uart
 #define _UART1_TX	_RB7	//pin16
 #define _UART1_RX	_RB2	//pin6

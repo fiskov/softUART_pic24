@@ -4,7 +4,7 @@
 #include "common.h"
 
 #define CMD_LENGTH        4
-#define CMD_RESP_LENGTH   8
+#define CMD_RESP_LENGTH   4
 
 bool cmdParse(uint8_t rxBfr[], uint8_t txBfr[]);
 

@@ -5,12 +5,12 @@
         <group>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/softUART.c</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/init.c</file>
-            <file>file:/C:/Work/Proton/Projects/sorfUART/src/drv_uart.c</file>
+            <file>file:/C:/Work/Proton/Projects/sorfUART/src/cmd.c</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/board.h</file>
+            <file>file:/C:/Work/Proton/Projects/sorfUART/src/cmd.h</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/main.c</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/softUART.h</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/init.h</file>
-            <file>file:/C:/Work/Proton/Projects/sorfUART/src/drv_uart.h</file>
         </group>
     </open-files>
 </project-private>
