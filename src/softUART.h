@@ -29,10 +29,10 @@ typedef struct {
 } softUART_config_t;
 
 // init softUART: timer, CN-int, 
-void softUART_init(softUART_config_t * p_cfg);
+void softUART_init(uint32_t speed);
 
 // transmite and receive
-uint8_t softUART_trncv(void);
+uint8_t softUART_trncv(uint8_t * p_rxBfr);
 
 void softUART_send(uint8_t bfr[], uint8_t length);
 

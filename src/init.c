@@ -21,4 +21,6 @@ void init(void)
   
   _DEBUG_TRIS = 0;
   _DEBUG2_TRIS = 0;
+  _MASTER_TRIS = 1;
+  _SLAVE_2_TRIS = 1;
 }

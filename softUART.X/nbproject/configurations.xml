@@ -12,7 +12,6 @@
       <itemPath>../src/softUART.h</itemPath>
       <itemPath>../src/config_bits.h</itemPath>
       <itemPath>../src/board.h</itemPath>
-      <itemPath>../src/drv_uart.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -26,7 +25,6 @@
       <itemPath>../src/init.c</itemPath>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/softUART.c</itemPath>
-      <itemPath>../src/drv_uart.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

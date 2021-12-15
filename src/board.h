@@ -8,16 +8,11 @@
 #define _DEBUG_TRIS 	_TRISA0
 #define _DEBUG2 			_RA1    
 #define _DEBUG2_TRIS 	_TRISA1
-//uart
-#define _UART1_TX	_RB7	//pin16
-#define _UART1_RX	_RB2	//pin6
-#define _UART2_TX	_RB0	//pin4
-#define _UART2_RX	_RB1	//pin5
 
-#define _UART1_TX_TRIS	_TRISB7
-#define _UART1_RX_TRIS	_TRISB2
-#define _UART2_TX_TRIS	_TRISB0	
-#define _UART2_RX_TRIS	_TRISB1	
+#define _MASTER_PIN _RA7
+#define _MASTER_TRIS 	_TRISA7
+#define _SLAVE_2_PIN _RA6
+#define _SLAVE_2_TRIS 	_TRISA6
 
 #define reverse_pin(pin) do {if (pin) pin=0; else pin=1;} while(0)
 /* a=target variable, b=bit number to act upon 0-n */
