@@ -32,7 +32,7 @@ typedef struct {
 void softUART_init(uint32_t speed);
 
 // transmite and receive
-uint8_t softUART_trncv(uint8_t * p_rxBfr);
+uint8_t softUART_trncv(uint8_t rxBfr[]);
 
 void softUART_send(uint8_t bfr[], uint8_t length);
 

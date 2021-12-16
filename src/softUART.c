@@ -2,7 +2,7 @@
 #include "board.h"
 #include "string.h"
 
-#define SOFT_BFR_SIZE 16    // 2^n = 8, 16, 32, 64...
+#define SOFT_BFR_SIZE 32    // 2^n = 8, 16, 32, 64...
 #define SOFT_BFR_SIZE_MASK (SOFT_BFR_SIZE-1)
 
 typedef struct {
@@ -24,7 +24,6 @@ static void setPin_mode_tx(void)
   SOFT_UART_TIMER_TMR = 0;
   SOFT_UART_TIMER_ON = 1;
   isTx = true;    
-  Nop();
 }
 static void setPin_mode_rx(void)
 {
@@ -49,13 +48,15 @@ void softUART_init(uint32_t speed)
 }
 
 
-uint8_t softUART_trncv(uint8_t * p_rxBfr)
+uint8_t softUART_trncv(uint8_t rxBfr[])
 {
     uint8_t res = 0;
     
     if (rx.len)
-        if (rx.tmr++ >= SOFT_UART_RX_TMR) {  
-            p_rxBfr = rx.bfr;
+        if (rx.tmr++ >= SOFT_UART_RX_TMR) {
+            int i;
+            for (i=0; i<rx.len; i++)
+                rxBfr[i] = rx.bfr[i];
             res = rx.len;
             rx.len = 0;
         }

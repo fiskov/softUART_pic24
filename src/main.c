@@ -5,18 +5,23 @@
 #include "cmd.h"
 #include "init.h"
 #include "board.h"
+#include "crc.h"
 
 static uint8_t timer1ms = 0;
-static uint8_t txBfr[16]="UU\r";
+static uint8_t txBfr[32]="1???\r", rxBfr[32];
+
+static bool isMaster = false;
+static uint8_t addr = 0;
+static uint8_t len = 0;
 
 int main(void) 
 {
   init(); //tmr1
-  bool isMaster = (_MASTER_PIN) ? true : false;
-  uint8_t addr = (_SLAVE_2_PIN) ? '2' : '1';
+  isMaster = (_MASTER_PIN) ? true : false;
+  addr = (_SLAVE_2_PIN) ? '2' : '1';
   if (isMaster) addr = 0;
   
-  softUART_init(19200); //tmr3, CN1
+  softUART_init(38400); //tmr3, CN1
       
   while (1) {
       ClrWdt();
@@ -28,26 +33,26 @@ int main(void)
             static uint16_t tmrSend=0;
             tmrSend++;
             switch (tmrSend) {
-            case 100:
+            case 1:
                 txBfr[0] = '1';
-                softUART_send( txBfr, CMD_LENGTH);
+                //txBfr[CMD_LENGTH-1] = getCrc8forTxString(txBfr, CMD_LENGTH-1);
+                softUART_send( txBfr, 5);
                 break;
-            case 130:
+            case 30:
                 txBfr[0] = '2';
-                softUART_send( txBfr, CMD_LENGTH);
+                //txBfr[CMD_LENGTH-1] = getCrc8forTxString(txBfr, CMD_LENGTH-1);
+                softUART_send( txBfr, 5);
                 break;
-            case 1000:
+            case 100:
                 tmrSend = 0;
                 break;
             }
         }
         
-        uint8_t * rxBfr = {0};
-        uint8_t len = softUART_trncv(rxBfr);
-        if ( len >= CMD_LENGTH ) 
-            if ( cmdParse(rxBfr, txBfr, addr) ) 
-                if (!isMaster)
-                    softUART_send( txBfr, CMD_RESP_LENGTH);
+        len = softUART_trncv(rxBfr);
+        if ( len && !isMaster)
+            if ( cmdParse(addr, rxBfr, len, txBfr, &len) )
+                softUART_send( txBfr, len);
     }
   }
   

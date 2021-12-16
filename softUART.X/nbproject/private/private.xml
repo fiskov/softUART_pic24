@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/softUART.c</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/init.c</file>
+            <file>file:/C:/Work/Proton/Projects/sorfUART/src/common_types.h</file>
+            <file>file:/C:/Work/Proton/Projects/sorfUART/src/crc.h</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/cmd.c</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/board.h</file>
             <file>file:/C:/Work/Proton/Projects/sorfUART/src/cmd.h</file>
