@@ -1,58 +1,55 @@
+/** @file main.c
+ */
 #include "config_bits.h" 
 #include "common.h"
-#include "common_types.h"
+
 #include "softUART.h"
 #include "cmd.h"
 #include "init.h"
 #include "board.h"
 #include "crc.h"
 
+#define SOFTUART_BAUDRATE   19200
+#define SOFTUART_TIMEOUT_MS 5
+
 static uint8_t timer1ms = 0;
-static uint8_t txBfr[32]="1???\r", rxBfr[32];
-
-static bool isMaster = false;
-static uint8_t addr = 0;
-static uint8_t len = 0;
-
-int main(void) 
-{
-  init(); //tmr1
-  isMaster = (_MASTER_PIN) ? true : false;
-  addr = (_SLAVE_2_PIN) ? '2' : '1';
-  if (isMaster) addr = 0;
+static uint8_t txBfr[32], rxBfr[32];
+uint16_t tmrSend = 0;
+bool isMaster = false;  
+uint8_t len, addr = 0;
   
-  softUART_init(38400); //tmr3, CN1
+int main(void) 
+{ 
+  board_init( &isMaster, &addr ); //tmr1
+  
+  softUART_init(SOFTUART_BAUDRATE, SOFTUART_TIMEOUT_MS);
       
   while (1) {
       ClrWdt();
-    
+      
     if (timer1ms) {
         timer1ms = 0;
         
         if (isMaster) {
-            static uint16_t tmrSend=0;
             tmrSend++;
             switch (tmrSend) {
-            case 1:
-                txBfr[0] = '1';
-                //txBfr[CMD_LENGTH-1] = getCrc8forTxString(txBfr, CMD_LENGTH-1);
-                softUART_send( txBfr, 5);
-                break;
-            case 30:
-                txBfr[0] = '2';
-                //txBfr[CMD_LENGTH-1] = getCrc8forTxString(txBfr, CMD_LENGTH-1);
-                softUART_send( txBfr, 5);
-                break;
-            case 100:
-                tmrSend = 0;
-                break;
+                case 0:
+                    cmdMakeTest(txBfr, '1', &len);
+                    softUART_send( txBfr, len);
+                    break;
+                case 30:
+                    cmdMakeTest(txBfr, '2', &len);
+                    softUART_send( txBfr, len);
+                    break;
+                case 100:
+                    tmrSend = 0;
+                    break;
             }
+        } else {       
+            if ( softUART_read(rxBfr, &len) )
+                if ( cmdParse(addr, rxBfr, len, txBfr, &len) )
+                    softUART_send( txBfr, len);
         }
-        
-        len = softUART_trncv(rxBfr);
-        if ( len && !isMaster)
-            if ( cmdParse(addr, rxBfr, len, txBfr, &len) )
-                softUART_send( txBfr, len);
     }
   }
   

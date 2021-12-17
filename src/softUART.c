@@ -8,15 +8,16 @@
 typedef struct {
     uint8_t bfr[SOFT_BFR_SIZE];
     uint8_t bitbfr; 
-    int16_t bitpos;
+    int8_t bitpos;
     uint16_t pos, len, tmr;
 } softBfr_t;
 
 static softBfr_t rx, tx;
 
 static bool isTx = false;
+static uint16_t soft_uart_rx_timeout_ms = 5;
 
-
+/// Switch driver to transmite mode
 static void setPin_mode_tx(void)
 {
   SOFT_UART_PIN_CN = 0;	// disable CN0 (RA4)
@@ -25,6 +26,8 @@ static void setPin_mode_tx(void)
   SOFT_UART_TIMER_ON = 1;
   isTx = true;    
 }
+
+/// Switch driver to receive mode
 static void setPin_mode_rx(void)
 {
   SOFT_UART_PIN_TRIS = 1; //input
@@ -36,29 +39,32 @@ static void setPin_mode_rx(void)
 }
 
 
-void softUART_init(uint32_t speed)
+void softUART_init(uint32_t baud_rate, uint16_t rx_timeout_ms)
 {  
-  setPin_mode_rx();  
-  memset((uint8_t*)&rx, 0, sizeof(rx));
-  memset((uint8_t*)&tx, 0, sizeof(tx));
+  setPin_mode_rx();
 
-  SOFT_UART_TIMER_PERIOD = (FCY / speed);
+  SOFT_UART_TIMER_PERIOD = (FCY / baud_rate);
+  soft_uart_rx_timeout_ms = rx_timeout_ms;
   SOFT_UART_TIMER_INT = 1;
   SOFT_UART_TIMER_ON = 1;
 }
 
 
-uint8_t softUART_trncv(uint8_t rxBfr[])
+bool softUART_read(uint8_t rxBfr[], uint8_t *length)
 {
-    uint8_t res = 0;
+    int i;
+    bool res = false;
     
     if (rx.len)
-        if (rx.tmr++ >= SOFT_UART_RX_TMR) {
-            int i;
+        if (rx.tmr++ >= soft_uart_rx_timeout_ms) 
+        {            
             for (i=0; i<rx.len; i++)
                 rxBfr[i] = rx.bfr[i];
-            res = rx.len;
+            
+            *length = rx.len;
             rx.len = 0;
+            
+            res = true;
         }
     return res;
 }
@@ -74,6 +80,9 @@ void softUART_send(uint8_t bfr[], uint8_t length)
     setPin_mode_tx();
 }
 
+/**
+ * Timer interrupt. Transmite or read in poll-mode 
+ */
 void _ISR _NOPSV SOFT_UART_TIMER_INT_PROC(void){
     SOFT_UART_TIMER_INT_FLAG = 0;
     if (isTx)
@@ -119,6 +128,7 @@ void _ISR _NOPSV SOFT_UART_TIMER_INT_PROC(void){
     }
 }   
 
+/// Change_Notification interrupt -> start timer in Rx-mode 
 void _ISR _NOPSV _CNInterrupt(void){
     _CNIF = 0 ; // Clear Interrupt Flag
     

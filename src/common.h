@@ -1,13 +1,16 @@
+/** 
+ * @file Common header
+ */
 #ifndef __COMMON_H
 #define __COMMON_H
 
-#define XTFREQ          8000000UL         //On-board Crystal frequency
+#define XT_FREQ          8000000UL         //On-board Crystal frequency
 #if defined(__PIC24F16KA102__)
 	#define PLLMODE         1               //On-chip PLL setting
 #else
 	#define PLLMODE         4
 #endif
-#define FCY             (XTFREQ*PLLMODE/2)        //Instruction Cycle Frequency
+#define FCY             (XT_FREQ * PLLMODE / 2)        //Instruction Cycle Frequency
 
 #include <libpic30.h>
 #include <xc.h>

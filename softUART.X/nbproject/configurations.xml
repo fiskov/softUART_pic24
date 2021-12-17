@@ -6,7 +6,6 @@
                    projectFiles="true">
       <itemPath>../src/cmd.h</itemPath>
       <itemPath>../src/common.h</itemPath>
-      <itemPath>../src/common_types.h</itemPath>
       <itemPath>../src/crc.h</itemPath>
       <itemPath>../src/init.h</itemPath>
       <itemPath>../src/softUART.h</itemPath>
