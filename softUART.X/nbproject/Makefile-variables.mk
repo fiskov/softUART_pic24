@@ -11,3 +11,10 @@ CND_ARTIFACT_PATH_default=dist/default/production/softUART.X.production.hex
 CND_PACKAGE_DIR_default=${CND_DISTDIR}/default/package
 CND_PACKAGE_NAME_default=softuart.x.tar
 CND_PACKAGE_PATH_default=${CND_DISTDIR}/default/package/softuart.x.tar
+# Application configuration
+CND_ARTIFACT_DIR_Application=dist/Application/production
+CND_ARTIFACT_NAME_Application=softUART.X.production.null
+CND_ARTIFACT_PATH_Application=dist/Application/production/softUART.X.production.null
+CND_PACKAGE_DIR_Application=${CND_DISTDIR}/Application/package
+CND_PACKAGE_NAME_Application=softuart.x.tar
+CND_PACKAGE_PATH_Application=${CND_DISTDIR}/Application/package/softuart.x.tar

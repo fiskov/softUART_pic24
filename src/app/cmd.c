@@ -2,50 +2,50 @@
  */
 #include "cmd.h"
 #include "crc.h"
+#include "textfunctions.h"
+#include "common_types.h"
+#include "string.h"
+
+#define CS_SIZE 2
+#define TEST_ANSWER_SIZE 8
 
 static const uint8_t endl[] = "\r\n";
-#define CS_SIZE 2
-#define TEST_ANSWER_SIZE 16
-
-/// Return HEX symbol for integer
-static char hex2char(uint8_t number){
-    char hex[0xF] = "0123456789ABCDEF";
-    return hex[number & 0xF];
-}
 
 /// Calculate LRC_CheckSum and insert in buffer
 static uint16_t cmdInsertLRC(uint8_t bfr[], uint8_t pos)
-{    
-    uint8_t cs = getLRC((char*)bfr, pos);
+{
+    uint8_t cs = getLRC(bfr, pos);
     bfr[pos] = hex2char(cs >> 4);
     bfr[pos+1] = hex2char(cs & 0xF);
     return pos+2;
 }
 /// check LRC_CheckSum in buffer
 static bool cmdCheckLRC(uint8_t bfr[], uint8_t pos)
-{    
-    uint8_t cs = getLRC((char*)bfr, pos);
+{
+    uint8_t cs = getLRC(bfr, pos);
     return (bfr[pos] == hex2char(cs >> 4) &&
         bfr[pos+1] == hex2char(cs & 0xF));
 }
 
-bool cmdParse(uint8_t addr, uint8_t rxBfr[], uint8_t rxLength, uint8_t txBfr[], uint8_t *txLength)
+bool cmdParse(data_t * data)
 {
     bool result = false;
     
-    if (rxLength > CS_SIZE + sizeof(endl))
+    if (data->rxLen > CS_SIZE + sizeof(endl))
     {        
-        if ( cmdCheckLRC( rxBfr, rxLength - CS_SIZE - sizeof(endl)) )
+        if ( cmdCheckLRC( data->rxBfr, data->rxLen - CS_SIZE - sizeof(endl)) )
         {
-            if (rxBfr[0] == addr) {
-                
+            if (data->rxBfr[0] == data->addr) {
                 uint8_t pos = 0;
-                while (pos < TEST_ANSWER_SIZE)
-                    txBfr[pos++] = addr;
+                data->txBfr[pos++] = data->addr;
+                data->txBfr[pos++] = ',';
+                myIntToStr((char*)&data->txBfr[pos], data->counter, TEST_ANSWER_SIZE-1, true);
+                pos += TEST_ANSWER_SIZE-1;
+                data->txBfr[pos++] = ',';
                 
-                pos = cmdInsertLRC(txBfr, pos);
-                memcpy(&txBfr[pos], endl, sizeof(endl)); 
-                *txLength = pos + sizeof(endl);
+                pos = cmdInsertLRC(data->txBfr, pos);
+                memcpy(&data->txBfr[pos], endl, sizeof(endl)); 
+                data->txLen = pos + sizeof(endl);
                 result = true;
             }
         }
@@ -57,7 +57,7 @@ bool cmdParse(uint8_t addr, uint8_t rxBfr[], uint8_t rxLength, uint8_t txBfr[], 
 void cmdMakeTest(uint8_t bfr[], uint8_t addr, uint8_t *length)
 {
     uint8_t pos = 0;
-    const char data = "hello";
+    const char data[] = ",hello,";
     
     bfr[pos++] = addr;
     memcpy((char*)&bfr[pos], data, sizeof(data));

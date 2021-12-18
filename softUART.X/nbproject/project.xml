@@ -13,11 +13,15 @@
             <sourceEncoding>windows-1251</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>../src</sourceRootElem>
+                <sourceRootElem>..</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
                     <name>default</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>Application</name>
                     <type>2</type>
                 </confElem>
             </confList>

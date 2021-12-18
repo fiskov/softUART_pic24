@@ -3,16 +3,16 @@
 
 #include <xc.h>
 
-//PIN CONFIG
-#define _DEBUG 			_RA0    
-#define _DEBUG_TRIS 	_TRISA0
-#define _DEBUG2 			_RA1    
-#define _DEBUG2_TRIS 	_TRISA1
+// PIN CONFIG
+#define _FREQ_TRIS 	_TRISB14
 
+// Adress pins
 #define _MASTER_PIN _RA7
 #define _MASTER_TRIS 	_TRISA7
 #define _SLAVE_2_PIN _RA6
 #define _SLAVE_2_TRIS 	_TRISA6
+
+
 
 #define reverse_pin(pin) do {if (pin) pin=0; else pin=1;} while(0)
 /* a=target variable, b=bit number to act upon 0-n */

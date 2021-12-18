@@ -1,6 +1,4 @@
-/*!
- * 
- * \file SoftUART_driver header.
+/** \file SoftUART_driver header.
  */
 #ifndef __SOFT_UART_H
 #define __SOFT_UART_H
@@ -29,7 +27,7 @@
 void softUART_init(uint32_t baud_rate, uint16_t rx_timeout_ms);
 
 /** 
- * receive data
+ * Receive data
  * \param[out] rxBfr  rx-buffer
  * \param[out] length Byte count if rx-buffer
  *

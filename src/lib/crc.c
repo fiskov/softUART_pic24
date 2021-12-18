@@ -1,13 +1,13 @@
 #include "crc.h"
-#include "common.h"
-//пример с wiki, http://ru.wikipedia.org/wiki/Циклический_избыточный_код
-//проверить можно на http://www.zorc.breitbandkatze.de/crc.html
+
+//CRC-8-Dallas, https://en.wikipedia.org/wiki/Cyclic_redundancy_check
+//for check use http://www.zorc.breitbandkatze.de/crc.html
 //Poly  : 0x31    x^8 + x^5 + x^4 + 1
 //Init  : 0xFF  direct
 //Revert: false
 //XorOut: 0x00 (no reverse!)
-//0x31 0x32 0x33 0x34 0x35 (получаем 9D)
-const unsigned char Crc8Table[256] = {
+//0x31 0x32 0x33 0x34 0x35 = 9D
+const uint8_t Crc8Table[256] = {
 0x00,0x31,0x62,0x53,0xC4,0xF5,0xA6,0x97,0xB9,0x88,0xDB,0xEA,0x7D,0x4C,0x1F,0x2E,
 0x43,0x72,0x21,0x10,0x87,0xB6,0xE5,0xD4,0xFA,0xCB,0x98,0xA9,0x3E,0x0F,0x5C,0x6D,
 0x86,0xB7,0xE4,0xD5,0x42,0x73,0x20,0x11,0x3F,0x0E,0x5D,0x6C,0xFB,0xCA,0x99,0xA8,
@@ -26,24 +26,23 @@ const unsigned char Crc8Table[256] = {
 0x82,0xB3,0xE0,0xD1,0x46,0x77,0x24,0x15,0x3B,0x0A,0x59,0x68,0xFF,0xCE,0x9D,0xAC
 };
 
-unsigned char getCrc8forTxString(unsigned char *s, int cnt){
-    unsigned char crc = Crc8Table[0xFF ^ s[0]]; //1
-    int i;
-    for (i=1; i<cnt; i++) crc = Crc8Table[crc ^ s[i]]; //1
+uint8_t getCrc8forTxString(uint8_t *s, int16_t cnt){
+    uint8_t crc = Crc8Table[0xFF ^ s[0]]; //1
+    int16_t i;
+    for (i=1; i<cnt; i++) crc = Crc8Table[crc ^ s[i]];
     return crc;
 }
 
-//LRC как в MODBUS ASCII
-unsigned char getLRC(char *s, int cnt){
-    unsigned char lrc = 0;
+/// Calc LRC MODBUS ASCII
+uint8_t getLRC(uint8_t *s, int16_t cnt){
+    uint8_t lrc = 0;
     while (cnt--)
         lrc += *s++;
     
     return (-lrc);
 }
 
-
-//CRC-16-CCITT для массива Int
+/// Calc CRC-16-CCITT for Int16-array
 uint16_t Crc16i(uint16_t *pcBlock, int16_t len){
     uint16_t i, crc = 0xFFFF;
 

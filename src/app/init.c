@@ -14,19 +14,23 @@ void board_init(bool * isMaster, uint8_t * addr)
   ANSB=0; 
 #endif
 
-  //tmr1 = 1000 Hz
-  //PR1 = FCY / 1000; 
-  _TON = 1; 
-  _T1IE = 1;  
-  
-  _DEBUG_TRIS = 0;
-  _DEBUG2_TRIS = 0;
+  // Pins init
+  _FREQ_TRIS = 1;
   
   _MASTER_TRIS = 1;
   _SLAVE_2_TRIS = 1;  
   
+  // tmr1 = 1000 Hz
+  PR1 = FCY / 1000; 
+  _TON = 1; 
+  _T1IE = 1;  
+  
+  // int1 - counter
+  _INT1IE = 1;
+  
+  // Variables init
   *isMaster = (_MASTER_PIN) ? true : false;
-  *addr = 0;
+  *addr = '0';
   if (*isMaster == false) 
       *addr = (_SLAVE_2_PIN) ? '2' : '1';
 }
