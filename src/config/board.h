@@ -4,7 +4,7 @@
 #include <xc.h>
 
 // PIN CONFIG
-#define _FREQ_TRIS 	_TRISB14
+#define _FREQ_TRIS 	_TRISB15
 
 // Adress pins
 #define _MASTER_PIN _RA7
@@ -12,6 +12,9 @@
 #define _SLAVE_2_PIN _RA6
 #define _SLAVE_2_TRIS 	_TRISA6
 
+// debug
+#define _DEBUG_PIN   _LATA0
+#define _DEBUG_TRIS  _TRISA0
 
 
 #define reverse_pin(pin) do {if (pin) pin=0; else pin=1;} while(0)

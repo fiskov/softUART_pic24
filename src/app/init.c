@@ -15,7 +15,7 @@ void board_init(bool * isMaster, uint8_t * addr)
 #endif
 
   // Pins init
-  _FREQ_TRIS = 1;
+  _DEBUG_TRIS = 0;
   
   _MASTER_TRIS = 1;
   _SLAVE_2_TRIS = 1;  
@@ -25,8 +25,9 @@ void board_init(bool * isMaster, uint8_t * addr)
   _TON = 1; 
   _T1IE = 1;  
   
-  // int1 - counter
-  _INT1IE = 1;
+  // tmr2 - counter
+  T2CONbits.TCS = 1;
+  T2CONbits.TON = 1;
   
   // Variables init
   *isMaster = (_MASTER_PIN) ? true : false;

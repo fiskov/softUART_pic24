@@ -21,7 +21,9 @@ int main(void)
   
   board_init( &data.isMaster, &data.addr ); //tmr1
   
-  softUART_init(SOFTUART_BAUDRATE, SOFTUART_TIMEOUT_MS);
+  
+  softUART_init(SOFTUART_BAUDRATE, SOFTUART_TIMEOUT_MS, 
+          (data.addr == '1' ? SOFT_UART_MODE_1WIRE : SOFT_UART_MODE_2WIRE));  
       
   while (1) {
     ClrWdt();
@@ -33,14 +35,20 @@ int main(void)
             //master send request
             tmrSend++;
             switch (tmrSend) {
-                case 1:
-                    cmdMakeTest(data.txBfr, '1', &data.txLen);
-                    softUART_send(data.txBfr, data.txLen);
-                    break;
+                case 1:                  
+                  cmdMakeTest(data.txBfr, '1', &data.txLen);
+                  
+                  softUART_switch(SOFT_UART_MODE_1WIRE);
+                  softUART_send(data.txBfr, data.txLen);  
+                  break;
+                  
                 case 30:
-                    cmdMakeTest(data.txBfr, '2', &data.txLen);
-                    softUART_send(data.txBfr, data.txLen);
-                    break;
+                  cmdMakeTest(data.txBfr, '2', &data.txLen);
+                  
+                  softUART_switch(SOFT_UART_MODE_2WIRE);
+                  softUART_send(data.txBfr, data.txLen);
+                  break;
+                  
                 case 100:
                     tmrSend = 0;
                     break;
@@ -57,14 +65,6 @@ int main(void)
   return 0;
 }
 
-/// pulse counter
-uint16_t counter;
-void _ISR _NOPSV _INT1Interrupt(void) 
-{
-    counter++;
-    _INT1IF = 0;
-}
-
 /// Interrupt 1000 Hz
 void _ISR _NOPSV _T1Interrupt(void) 
 {
@@ -74,8 +74,8 @@ void _ISR _NOPSV _T1Interrupt(void)
     static uint16_t timer1000 = 1000;
     if (--timer1000 == 0) 
     {
-        data.counter = counter;
-        counter = 0;
+        data.counter = TMR2;  // pulse counter
+        TMR2 = 0;
         
         timer1000 = 1000;
     }

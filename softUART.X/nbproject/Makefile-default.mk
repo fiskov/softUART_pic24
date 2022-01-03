@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../src/app/cmd.c ../src/app/init.c ../src/drv/softUART.c ../src/lib/crc.c ../src/main.c ../src/lib/textfunctions.c
+SOURCEFILES_QUOTED_IF_SPACED=../src/app/cmd.c ../src/app/init.c ../src/drv/softUART.c ../src/lib/crc.c ../src/lib/textfunctions.c ../src/main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/659850791/cmd.o ${OBJECTDIR}/_ext/659850791/init.o ${OBJECTDIR}/_ext/659853742/softUART.o ${OBJECTDIR}/_ext/659861131/crc.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/659861131/textfunctions.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/659850791/cmd.o.d ${OBJECTDIR}/_ext/659850791/init.o.d ${OBJECTDIR}/_ext/659853742/softUART.o.d ${OBJECTDIR}/_ext/659861131/crc.o.d ${OBJECTDIR}/_ext/1360937237/main.o.d ${OBJECTDIR}/_ext/659861131/textfunctions.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/659850791/cmd.o ${OBJECTDIR}/_ext/659850791/init.o ${OBJECTDIR}/_ext/659853742/softUART.o ${OBJECTDIR}/_ext/659861131/crc.o ${OBJECTDIR}/_ext/659861131/textfunctions.o ${OBJECTDIR}/_ext/1360937237/main.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/659850791/cmd.o.d ${OBJECTDIR}/_ext/659850791/init.o.d ${OBJECTDIR}/_ext/659853742/softUART.o.d ${OBJECTDIR}/_ext/659861131/crc.o.d ${OBJECTDIR}/_ext/659861131/textfunctions.o.d ${OBJECTDIR}/_ext/1360937237/main.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/659850791/cmd.o ${OBJECTDIR}/_ext/659850791/init.o ${OBJECTDIR}/_ext/659853742/softUART.o ${OBJECTDIR}/_ext/659861131/crc.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/659861131/textfunctions.o
+OBJECTFILES=${OBJECTDIR}/_ext/659850791/cmd.o ${OBJECTDIR}/_ext/659850791/init.o ${OBJECTDIR}/_ext/659853742/softUART.o ${OBJECTDIR}/_ext/659861131/crc.o ${OBJECTDIR}/_ext/659861131/textfunctions.o ${OBJECTDIR}/_ext/1360937237/main.o
 
 # Source Files
-SOURCEFILES=../src/app/cmd.c ../src/app/init.c ../src/drv/softUART.c ../src/lib/crc.c ../src/main.c ../src/lib/textfunctions.c
+SOURCEFILES=../src/app/cmd.c ../src/app/init.c ../src/drv/softUART.c ../src/lib/crc.c ../src/lib/textfunctions.c ../src/main.c
 
 
 
@@ -139,17 +139,17 @@ ${OBJECTDIR}/_ext/659861131/crc.o: ../src/lib/crc.c  .generated_files/flags/defa
 	@${RM} ${OBJECTDIR}/_ext/659861131/crc.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/lib/crc.c  -o ${OBJECTDIR}/_ext/659861131/crc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/659861131/crc.o.d"      -g -D__DEBUG     -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  .generated_files/flags/default/a6ecef60c6fdc6255350cb17e5c88c748f6d5f3c .generated_files/flags/default/ea2a7066b12fd53932fd9a63046cd42f96dd5fb4
-	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/main.c  -o ${OBJECTDIR}/_ext/1360937237/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d"      -g -D__DEBUG     -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/_ext/659861131/textfunctions.o: ../src/lib/textfunctions.c  .generated_files/flags/default/49ea33416666a3d2d92efa5f6f24b08b01c93c94 .generated_files/flags/default/ea2a7066b12fd53932fd9a63046cd42f96dd5fb4
 	@${MKDIR} "${OBJECTDIR}/_ext/659861131" 
 	@${RM} ${OBJECTDIR}/_ext/659861131/textfunctions.o.d 
 	@${RM} ${OBJECTDIR}/_ext/659861131/textfunctions.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/lib/textfunctions.c  -o ${OBJECTDIR}/_ext/659861131/textfunctions.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/659861131/textfunctions.o.d"      -g -D__DEBUG     -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  .generated_files/flags/default/a6ecef60c6fdc6255350cb17e5c88c748f6d5f3c .generated_files/flags/default/ea2a7066b12fd53932fd9a63046cd42f96dd5fb4
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/main.c  -o ${OBJECTDIR}/_ext/1360937237/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d"      -g -D__DEBUG     -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
 ${OBJECTDIR}/_ext/659850791/cmd.o: ../src/app/cmd.c  .generated_files/flags/default/6f821ecf57caca0908d2038c89fb377acd6a5943 .generated_files/flags/default/ea2a7066b12fd53932fd9a63046cd42f96dd5fb4
@@ -176,17 +176,17 @@ ${OBJECTDIR}/_ext/659861131/crc.o: ../src/lib/crc.c  .generated_files/flags/defa
 	@${RM} ${OBJECTDIR}/_ext/659861131/crc.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/lib/crc.c  -o ${OBJECTDIR}/_ext/659861131/crc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/659861131/crc.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  .generated_files/flags/default/ae44e1a6579eb4f6dfd41e494652a214cab7369d .generated_files/flags/default/ea2a7066b12fd53932fd9a63046cd42f96dd5fb4
-	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/main.c  -o ${OBJECTDIR}/_ext/1360937237/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/_ext/659861131/textfunctions.o: ../src/lib/textfunctions.c  .generated_files/flags/default/6d47d111651eb40d9d0a4f62b0f105ee5f29208c .generated_files/flags/default/ea2a7066b12fd53932fd9a63046cd42f96dd5fb4
 	@${MKDIR} "${OBJECTDIR}/_ext/659861131" 
 	@${RM} ${OBJECTDIR}/_ext/659861131/textfunctions.o.d 
 	@${RM} ${OBJECTDIR}/_ext/659861131/textfunctions.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/lib/textfunctions.c  -o ${OBJECTDIR}/_ext/659861131/textfunctions.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/659861131/textfunctions.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  .generated_files/flags/default/ae44e1a6579eb4f6dfd41e494652a214cab7369d .generated_files/flags/default/ea2a7066b12fd53932fd9a63046cd42f96dd5fb4
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../src/main.c  -o ${OBJECTDIR}/_ext/1360937237/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -msmall-data -O1 -I"../src/config" -I"../src/lib" -I"../src/drv" -I"../src/app" -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
